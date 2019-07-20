@@ -10,7 +10,7 @@ CreateRepo(){
 	
 	echo "===========please enter you remote repo URL:============="
 	read repoUrl
-	echo ${repoUrl} >config.s
+	echo ${repoUrl} >config.conf
 	#起个别名picture
 	git remote add picture ${repoUrl} 
 	echo "========your repo Url is ${repoUrl}"
@@ -53,7 +53,7 @@ git push picture master
 
 echo "===================git push successful===================="
 
-spiltUrl=$(cat ./config.s) 
+spiltUrl=$(cat ./config.conf) 
 echo spiltUrl=${spiltUrl}
 
 
@@ -86,7 +86,7 @@ fileflag=false
 if [ -d $file ] && [ -e $file ]
 then
    echo "=======================检测到Git仓库...====================="
-   git config -l |grep remote.*.url | awk  -F '='  '{print $2}' > config.s
+   git config -l |grep remote.*.url | awk  -F '='  '{print $2}' > config.conf
    fileflag=true
 else
    echo ".git文件目录不存在,是否创建一个新的Git repo？(y/n)"
