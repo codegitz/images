@@ -37,12 +37,16 @@ echo "===================git push successful===================="
 
 spiltUrl=$(cat ./config.s) 
 echo spiltUrl=${spiltUrl}
-baseURL=https://raw.githubusercontent.com/codegitz/upload/master/
-echo "图片URL为:${baseURL}"
+
+arr=(${spiltUrl///// })
+tmpURL=${baseURL}${arr[3]}${arr[4]}
+picURL=${tmpURL%.*}
+echo ${picURL}
+
 #输出图片URL
 LINE=" "
 cat ./name.s | while read LINE; do
-    echo "picUrl: ${baseURL}${LINE}"
+    echo "picUrl: ${picURL}/master/${LINE}"
 done;
 echo "upload successful...."
 

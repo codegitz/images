@@ -11,7 +11,7 @@ CreateRepo(){
 }
 
 
-
+:<<EOF
 file=".git"
 #是否存在仓库
 fileflag=false
@@ -32,5 +32,29 @@ else
       echo "Do not create new repo..."
    fi	  
 fi
+EOF
+
+
+spiltUrl=https://github.com/codegitz/images.git
+
+baseURL=https://raw.githubusercontent.com/
+#codegitz/upload/master/
+
+#https://raw.githubusercontent.com/codegitz/images/master/Xshell_GEmdcwQlQQ.png
+
+#https://raw.githubusercontent.com/codegitz/upload/master/Xshell_GEmdcwQlQQ.png
+
+
+ 
+arr=(${spiltUrl///// })
+tmpURL=${baseURL}${arr[3]}${arr[4]}
+picURL=${tmpURL%.*}
+echo ${picURL}
+#cat ./name.s |awk  -F ' '  '{print $1}' 
+
+
+
+
+
 
 
