@@ -12,3 +12,4 @@
 	deleted:    oVXVFZSGRk.gif
 	deleted:    obafX2yr8x.gif
 	deleted:    tLPShBe2N3.png
+	Xshell_GEmdcwQlQQ.png
