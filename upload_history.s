@@ -14,3 +14,4 @@
 	deleted:    tLPShBe2N3.png
 	Xshell_GEmdcwQlQQ.png
 	"\345\276\256\344\277\241\346\210\252\345\233\276_20190715164914.png"
+	ugwDPJECSH.gif
