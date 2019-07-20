@@ -38,6 +38,10 @@ echo "===================git push successful===================="
 spiltUrl=$(cat ./config.s) 
 echo spiltUrl=${spiltUrl}
 
+#spiltUrl=https://github.com/codegitz/images.git
+
+baseURL=https://raw.githubusercontent.com/
+
 arr=(${spiltUrl///// })
 tmpURL=${baseURL}${arr[3]}${arr[4]}
 picURL=${tmpURL%.*}
