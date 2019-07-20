@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#配置文件变量初始化
+spiltUrl=`sed '/^spiltUrl=/!d;s/.*=//' ./config.conf` 
+
+
 #可以上传的格式,添加只需满足 |txt|*|....这个格式
 format="gif|png|jpg"
 
@@ -7,7 +11,7 @@ format="gif|png|jpg"
 CreateRepo(){
 	echo "====================Initing repo....:===================="
 	git init #| tee log.s
-	
+	mkdir -p images
 	echo "===========please enter you remote repo URL:============="
 	read repoUrl
 	echo ${repoUrl} >config.conf
@@ -17,18 +21,20 @@ CreateRepo(){
 }
 
 #Define上传图片function
-#目前只能增加上传图片
+#目前只能增加上传图片，删除什么的有问题
 upload(){
 echo "===================Prepare for the upload====================="
 
 #1.解决很长时间没有使用的仓库push出现Updates were rejected because the tip of your current branch is behind的问题
 #2.解决在本地用git add remore origin添加远程库push出现的问题，问题同上
 
+git status images\ >NewPic.log
 echo "===============auto merge conflicts start=================" 
 git pull picture master --allow-unrelated-histories  
 git add . 
 git commit -m"auto merge conflicts"  
 echo "===============auto merge conflicts end===================" 
+#git status >NewPic.log
 grep -E "${format}" NewPic.log >name.s 
 grep -E "${format}" NewPic.log >>upload_history.log
 
@@ -53,7 +59,7 @@ git push picture master
 
 echo "===================git push successful===================="
 
-spiltUrl=$(cat ./config.conf) 
+#spiltUrl=$(cat ./config.conf) 
 echo spiltUrl=${spiltUrl}
 
 
@@ -107,7 +113,8 @@ fi
 #echo fileflag=${fileflag}
 if [ ${fileflag} == true ]
 then
-   upload 
+  # upload
+   echo "upload"  
 else
    echo "=============找不到Git仓库，Shell退出执行================"
 fi
