@@ -32,7 +32,7 @@ echo "your commit is：${commit}"
 echo "===================git commiting...======================="
 git commit -m"${commit}"
 echo "===================git pushing...========================="
-git push origin picture
+git push picture master
 echo "===================git push successful===================="
 
 spiltUrl=$(cat ./config.s) 
