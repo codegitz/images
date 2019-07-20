@@ -1,26 +1,36 @@
 #!/bin/bash
 
-
+#可以上传的格式,添加只需满足 |txt|*|....这个格式
+format="gif|png|jpg"
 
 #Define新建仓库function CreateRepo
 CreateRepo(){
 	echo "====================Initing repo....:===================="
-	git init | tee log.s
+	git init #| tee log.s
 	
-	echo "===============please enter you repo URL:================"
+	echo "===========please enter you remote repo URL:============="
 	read repoUrl
 	echo ${repoUrl} >config.s
+	#起个别名picture
 	git remote add picture ${repoUrl} 
-	echo "===============your repo Url is ${repoUrl}==============="
+	echo "========your repo Url is ${repoUrl}"
 }
 
 #Define上传图片function
+#目前只能增加上传图片
 upload(){
-echo "===================Prepare for upload====================="
-git status >NewPic.log
-grep -E "gif|png|jpg" NewPic.log >name.s  
-grep -E "gif|png|jpg" NewPic.log >>upload_history.s
-#name_list=$(cat ./name.s)
+echo "===================Prepare for the upload====================="
+
+#1.解决很长时间没有使用的仓库push出现Updates were rejected because the tip of your current branch is behind的问题
+#2.解决在本地用git add remore origin添加远程库push出现的问题，问题同上
+
+echo "===============auto merge conflicts start=================" 
+git pull picture master --allow-unrelated-histories  
+git add . 
+git commit -m"auto merge conflicts"  
+echo "===============auto merge conflicts end===================" 
+grep -E "${format}" NewPic.log >name.s 
+grep -E "${format}" NewPic.log >>upload_history.log
 
 #cat ./name.s |awk  -F ' '  '{print $1}' 
 
@@ -32,17 +42,24 @@ echo "your commit is：${commit}"
 echo "===================git commiting...======================="
 git commit -m"${commit}"
 echo "===================git pushing...========================="
+
+echo "===============auto merge conflicts start=================" 
+git pull picture master --allow-unrelated-histories  
+git add . 
+git commit -m"auto merge conflicts"  
+echo "===============auto merge conflicts end===================" 
+
 git push picture master
+
 echo "===================git push successful===================="
 
 spiltUrl=$(cat ./config.s) 
 echo spiltUrl=${spiltUrl}
 
-#spiltUrl=https://github.com/codegitz/images.git
 
 baseURL=https://raw.githubusercontent.com/
-
-arr=(${spiltUrl///// })
+#拼接返回的图片URL
+arr=(${spiltUrl///// })  #按/划分URL，存在数组中
 tmpURL=${baseURL}${arr[3]}${arr[4]}
 picURL=${tmpURL%.*}
 echo ${picURL}
@@ -50,9 +67,16 @@ echo ${picURL}
 #输出图片URL
 LINE=" "
 cat ./name.s | while read LINE; do
-    echo "picUrl: ${picURL}/master/${LINE}"
+    if [ "$dmin" = "" ]; 
+	then
+      echo "没有新增的图片!"
+    else 
+      echo "picUrl: ${picURL}/master/${LINE}"
+    fi
+	echo "upload successful...."
+    
 done;
-echo "upload successful...."
+
 
 }
 #############################################################
@@ -62,9 +86,9 @@ fileflag=false
 if [ -d $file ] && [ -e $file ]
 then
    echo "=======================检测到Git仓库...====================="
+   git config -l |grep remote.*.url | awk  -F '='  '{print $2}' > config.s
    fileflag=true
 else
-   
    echo ".git文件目录不存在,是否创建一个新的Git repo？(y/n)"
    read isCreate
    #echo ${isCreate}
@@ -74,16 +98,16 @@ else
 	  CreateRepo
 	  fileflag=true
    else
-      echo "============you choose Do NOT create new repo...========="
+      echo "============You choose Do NOT create new repo...========="
 	  echo "====================Shell Exiting.....==================="
    fi	  
 fi
 
-#存在仓库，上传图片
-echo fileflag=${fileflag}
+#存在Git仓库，上传图片
+#echo fileflag=${fileflag}
 if [ ${fileflag} == true ]
 then
    upload 
 else
-   echo "============找不到Git仓库，Shell退出执行================"
+   echo "=============找不到Git仓库，Shell退出执行================"
 fi

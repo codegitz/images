@@ -32,7 +32,7 @@ else
       echo "Do not create new repo..."
    fi	  
 fi
-EOF
+
 
 
 spiltUrl=https://github.com/codegitz/images.git
@@ -51,10 +51,12 @@ tmpURL=${baseURL}${arr[3]}${arr[4]}
 picURL=${tmpURL%.*}
 echo ${picURL}
 #cat ./name.s |awk  -F ' '  '{print $1}' 
+EOF
 
 
 
 
+git config -l |grep https | awk  -F '='  '{print $2}'
 
 
 
