@@ -71,7 +71,7 @@ picURL=${tmpURL%.*}
 echo ${picURL}
 
 #输出图片URL
-#LINE=" "
+LINE=" "
 cat ./name.s | while read LINE; do
     if [ "$LINE" = "" ]; 
 	then
@@ -114,7 +114,7 @@ fi
 if [ ${fileflag} == true ]
 then
    upload
-   echo "upload"  
+   #echo "upload"  
 else
    echo "=============找不到Git仓库，Shell退出执行================"
 fi
