@@ -14,7 +14,7 @@ CreateRepo(){
 	mkdir -p images
 	echo "===========please enter you remote repo URL:============="
 	read repoUrl
-	echo ${repoUrl} >config.conf
+	echo ${repoUrl} >>config.conf
 	#起个别名picture
 	git remote add picture ${repoUrl} 
 	echo "========your repo Url is ${repoUrl}"
@@ -28,11 +28,11 @@ echo "===================Prepare for the upload====================="
 #1.解决很长时间没有使用的仓库push出现Updates were rejected because the tip of your current branch is behind的问题
 #2.解决在本地用git add remore origin添加远程库push出现的问题，问题同上
 
-git status images\ >NewPic.log
+git status  >NewPic.log
 echo "===============auto merge conflicts start=================" 
-git pull picture master --allow-unrelated-histories  
-git add . 
-git commit -m"auto merge conflicts"  
+#git pull picture master --allow-unrelated-histories  
+#git add . 
+#git commit -m"auto merge conflicts"  
 echo "===============auto merge conflicts end===================" 
 #git status >NewPic.log
 grep -E "${format}" NewPic.log >name.s 
@@ -92,7 +92,7 @@ fileflag=false
 if [ -d $file ] && [ -e $file ]
 then
    echo "=======================检测到Git仓库...====================="
-   git config -l |grep remote.*.url | awk  -F '='  '{print $2}' > config.conf
+   git config -l |grep remote.*.url | awk  -F '='  '{print $2}' >> config.conf
    fileflag=true
 else
    echo ".git文件目录不存在,是否创建一个新的Git repo？(y/n)"
@@ -113,7 +113,7 @@ fi
 #echo fileflag=${fileflag}
 if [ ${fileflag} == true ]
 then
-  # upload
+   upload
    echo "upload"  
 else
    echo "=============找不到Git仓库，Shell退出执行================"
