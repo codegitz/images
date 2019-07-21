@@ -1,1 +1,1 @@
-	one.png
+	chrome_xyjDjO7Mjc.png

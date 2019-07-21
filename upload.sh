@@ -71,9 +71,9 @@ picURL=${tmpURL%.*}
 echo ${picURL}
 
 #输出图片URL
-LINE=" "
+#LINE=" "
 cat ./name.s | while read LINE; do
-    if [ "$dmin" = "" ]; 
+    if [ "$LINE" = "" ]; 
 	then
       echo "没有新增的图片!"
     else 
