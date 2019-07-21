@@ -1,15 +1,14 @@
 On branch master
 Changes not staged for commit:
-  (use "git add/rm <file>..." to update what will be committed)
+  (use "git add <file>..." to update what will be committed)
   (use "git checkout -- <file>..." to discard changes in working directory)
 
 	modified:   NewPic.log
-	deleted:    ShareX_BpdbQHQoTB.png
-	deleted:    ShareX_a88eTP7ef9.png
-	deleted:    chrome_xyjDjO7Mjc.png
 	modified:   config.conf
-	deleted:    one.png
-	modified:   upload.sh
-	deleted:    "\345\276\256\344\277\241\345\233\276\347\211\207_20170722003352.jpg"
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	chrome_xyjDjO7Mjc.png
 
 no changes added to commit (use "git add" and/or "git commit -a")
