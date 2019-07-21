@@ -68,12 +68,12 @@ baseURL=https://raw.githubusercontent.com/
 arr=(${spiltUrl///// })  #按/划分URL，存在数组中
 tmpURL=${baseURL}${arr[3]}${arr[4]}
 picURL=${tmpURL%.*}
-echo ${picURL}
+#echo ${picURL}
 
 #输出图片URL
 LINE=" "
 cat ./name.s | while read LINE; do
-    if [ "$LINE" = "" ]; 
+    if [ "$LINE" = " " ]; 
 	then
       echo "没有新增的图片!"
     else 
