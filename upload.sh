@@ -23,7 +23,7 @@ CreateRepo(){
 #Define上传图片function
 #目前只能增加上传图片，删除什么的有问题
 upload(){
-echo "===================Prepare for the upload====================="
+echo "=================Prepare for the upload==================="
 
 #1.解决很长时间没有使用的仓库push出现Updates were rejected because the tip of your current branch is behind的问题
 #2.解决在本地用git add remore origin添加远程库push出现的问题，问题同上
@@ -91,7 +91,7 @@ file=".git"
 fileflag=false
 if [ -d $file ] && [ -e $file ]
 then
-   echo "=======================检测到Git仓库...====================="
+   echo "======================检测到Git仓库...===================="
    git config -l |grep remote.*.url | awk  -F '='  '{print $2}' >> config.conf
    fileflag=true
 else
